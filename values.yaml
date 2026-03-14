@@ -1,0 +1,32 @@
+# Postgres config
+postgres:
+  image: postgres
+  tag: latest
+  replicas: 1
+  database: mydb
+
+# Credentials
+auth:
+  username: admin
+  password: admin123
+  dbUrl: "postgresql://admin:admin123@postgres-service:5432/mydb"
+
+# pgAdmin config
+pgadmin:
+  image: dpage/pgadmin4
+  tag: latest
+  replicas: 1
+  email: admin@admin.com
+  password: admin123
+
+# Service config
+service:
+  type: ClusterIP
+  postgresPort: 5432
+  pgadminPort: 80
+
+# Ingress config
+ingress:
+  enabled: true
+  className: nginx
+  host: pgadmin.local
