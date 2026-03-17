@@ -1,11 +1,12 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: postgres-deployment
+  name: postgres
   namespace: {{ .Release.Namespace }}
   labels:
     app: postgres
 spec:
+  serviceName: postgres-service     # must match your service name
   replicas: {{ .Values.postgres.replicas }}
   selector:
     matchLabels:
@@ -24,6 +25,8 @@ spec:
             - configMapRef:
                 name: postgres-config
           env:
+            - name: PGDATA 
+              value: /var/lib/postgresql/pgdata
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
@@ -34,3 +37,17 @@ spec:
                 secretKeyRef:
                   name: postgres-secret
                   key: password
+          volumeMounts:
+            - name: postgres-data
+              mountPath: /var/lib/postgresql/pgdata # where postgres stores data inside container
+  volumeClaimTemplates:
+    - metadata:
+        name: postgres-data
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        storageClassName: standard
+        resources:
+          requests:
+            storage: {{ .Values.postgres.storageSize }}
+
+

@@ -1,9 +1,10 @@
 # Postgres config
 postgres:
   image: postgres
-  tag: latest
+  tag: "16"
   replicas: 1
   database: mydb
+  storageSize: 1Gi
 
 # Credentials
 auth:
