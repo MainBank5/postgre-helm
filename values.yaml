@@ -1,7 +1,7 @@
 # Postgres config
 postgres:
   image: postgres
-  tag: "16"
+  tag: "15"
   replicas: 1
   database: mydb
   storageSize: 1Gi
