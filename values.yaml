@@ -16,7 +16,7 @@ auth:
 pgadmin:
   image: dpage/pgadmin4
   tag: latest
-  replicas: 1
+  replicas: 2
   email: admin@admin.com
   password: admin123
 
