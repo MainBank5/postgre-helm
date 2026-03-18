@@ -1,7 +1,7 @@
 # Postgres config
 postgres:
   image: postgres
-  tag: "15"
+  tag: "16"
   replicas: 1
   database: mydb
   storageSize: 1Gi
@@ -16,7 +16,7 @@ auth:
 pgadmin:
   image: dpage/pgadmin4
   tag: latest
-  replicas: 2
+  replicas: 1
   email: admin@admin.com
   password: admin123
 
