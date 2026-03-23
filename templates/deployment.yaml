@@ -39,7 +39,7 @@ spec:
                   key: password
           volumeMounts:
             - name: postgres-data
-              mountPath: /var/lib/postgresql/pgdata # where postgres stores data inside container
+              mountPath: /var/lib/postgresql # where postgres stores data inside container
   volumeClaimTemplates:
     - metadata:
         name: postgres-data
