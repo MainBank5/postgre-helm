@@ -1,14 +1,40 @@
+#local ingress 
+#{{- if .Values.ingress.enabled }}
+#apiVersion: networking.k8s.io/v1
+#kind: Ingress
+#metadata:
+  #name: pgadmin-ingress
+  #namespace: {{ .Release.Namespace }}
+#spec:
+  #ingressClassName: {{ .Values.ingress.className }}
+  #rules:
+    #- host: {{ .Values.ingress.host }}
+     # http:
+        #paths:
+          #- path: /
+           # pathType: Prefix
+            #backend:
+             # service:
+               # name: pgadmin-service
+                #port:
+                 # number: {{ .Values.service.pgadminPort }}
+#{{- end }}
+
+#aws alb 
 {{- if .Values.ingress.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: pgadmin-ingress
   namespace: {{ .Release.Namespace }}
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
 spec:
-  ingressClassName: {{ .Values.ingress.className }}
+  ingressClassName: alb
   rules:
-    - host: {{ .Values.ingress.host }}
-      http:
+    - http:
         paths:
           - path: /
             pathType: Prefix
