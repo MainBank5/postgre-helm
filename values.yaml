@@ -5,6 +5,7 @@ postgres:
   replicas: 1
   database: mydb
   storageSize: 1Gi
+  storageClass: gp2
 
 # Credentials
 auth:

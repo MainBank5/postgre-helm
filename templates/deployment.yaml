@@ -48,6 +48,6 @@ spec:
         storageClassName: standard
         resources:
           requests:
-            storage: {{ .Values.postgres.storageSize }}
+            storage: {{ .Values.postgres.storageClass }}
 
 
